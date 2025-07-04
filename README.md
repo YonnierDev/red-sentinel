@@ -24,12 +24,67 @@
 
 ```mermaid
 graph TD
-    A[Frontend React] <--> B[Backend Node.js]
-    B <--> C[Modelo ML Python (FastAPI)]
-    D[Dispositivos de Red] -->|Envía logs| B
-    B -->|Alertas| E[Dashboard]
-    B -->|Notificaciones| F[App Móvil]
+    subgraph Frontend
+        A[React App]
+    end
+    
+    subgraph Backend
+        B[Node.js API]
+        C[FastAPI ML Service]
+        D[Database]
+    end
+    
+    subgraph Mobile
+        E[App Móvil]
+    end
+    
+    A --> B
+    B --> C
+    B --> D
+    B --> E
+    C --> B
 ```
+
+### 🏗️ Microservicios
+
+El proyecto está diseñado como una arquitectura de microservicios:
+
+1. **API Gateway**
+   - Maneja todas las peticiones entrantes
+   - Autenticación y autorización
+   - Rate limiting
+   - Logging y monitoring
+
+2. **Servicio de Análisis** (FastAPI)
+   - Procesamiento de datos en tiempo real
+   - Integración con modelos de ML
+   - Clasificación de amenazas
+   - Generación de recomendaciones
+
+3. **Servicio de Notificaciones**
+   - Sistema de alertas
+   - Notificaciones push
+   - Email y SMS
+   - Integración con servicios externos
+
+4. **Servicio de Monitoreo**
+   - Métricas en tiempo real
+   - Logging centralizado
+   - Health checks
+   - Alertas de rendimiento
+
+5. **Servicio de Base de Datos**
+   - Almacenamiento de logs
+   - Historial de amenazas
+   - Configuraciones
+   - Estados de alertas
+
+Cada microservicio es:
+- Independiente y desacoplado
+- Escalable individualmente
+- Desplegable por separado
+- Con su propia base de datos
+- Con su propio ciclo de vida
 
 ### 📦 Stack Tecnológico
 

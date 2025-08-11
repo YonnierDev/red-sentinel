@@ -1,19 +1,31 @@
 # En app/main.py
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .services.ml_service import ml_service  # Importa el servicio
+from .core.config import settings
+from .api.endpoints import router as api_router
 
 app = FastAPI(
     title="Red Sentinel ML API",
     description="API para análisis de amenazas de red con IA",
-    version="0.1.0"
+    version=getattr(settings, "MODEL_VERSION", "0.1.0")
 )
 
-# ... (resto de la configuración)
+# Configuración de CORS (ajusta orígenes según tu entorno)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-@app.post("/analyze")
-async def analyze(data: dict):
-    """Endpoint para análisis de amenazas."""
-    return await ml_service.analyze_threat(data)
+# Incluir los endpoints MCP (ya llevan prefijo /api/v1 en el router)
+app.include_router(api_router)
 
-# ... (resto de los endpoints)
+@app.get("/")
+async def root():
+    return {
+        "message": "Red Sentinel ML API",
+        "docs": "/docs",
+        "health": "/api/v1/health"
+    }

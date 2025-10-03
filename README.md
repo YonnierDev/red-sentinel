@@ -4,7 +4,6 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-Python-blue)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-DB-lightblue)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
-![Build](https://github.com/YonnierDev/red-sentinel/actions/workflows/ci.yml/badge.svg)
 
 
 **Red Sentinel** es un sistema inteligente de monitoreo de red que detecta patrones de escaneo sospechosos, predice su nivel de riesgo mediante IA y sugiere acciones de mitigación en tiempo real.

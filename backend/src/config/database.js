@@ -1,14 +1,14 @@
 // src/config/database.js
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config();
 
-const config = {
+module.exports = {
   development: {
     username: process.env.DB_USER || 'postgres',
     password: process.env.DB_PASS || 'postgres',
     database: process.env.DB_NAME || 'red_sentinel_dev',
     host: process.env.DB_HOST || '127.0.0.1',
-    port: process.env.DB_PORT || 5432,
+    port: Number(process.env.DB_PORT) || 5432,
     dialect: 'postgres',
     logging: console.log
   },
@@ -17,7 +17,7 @@ const config = {
     password: process.env.TEST_DB_PASS || 'postgres',
     database: process.env.TEST_DB_NAME || 'red_sentinel_test',
     host: process.env.TEST_DB_HOST || '127.0.0.1',
-    port: process.env.TEST_DB_PORT || 5432,
+    port: Number(process.env.TEST_DB_PORT) || 5432,
     dialect: 'postgres'
   },
   production: {
@@ -32,5 +32,3 @@ const config = {
     logging: false
   }
 };
-
-export default config;
